@@ -56,13 +56,15 @@ app.get('/weather', (req, res) => {
             })
         }else{
             //console.log(response)
-            forecast(latitude, longitude, (error, {weather_descriptions,temperature,feelslike} = {}) => {
+            forecast(latitude, longitude, (error, {weather_descriptions,temperature,feelslike, wind_speed, humidity} = {}) => {
                 if(error){
                     return res.send({
                         error : error
                     })
                 }else {
                     const forecast = weather_descriptions[0]+'. It is currently '+temperature+' degrees out. It feels like '+feelslike+ ' degrees out'
+                                    + '.Wind Speed is '+ wind_speed +' knots with a humidity of '+ humidity + ' percent.'
+                    
                     res.send({
                         location: location,
                         forecast: forecast                        
